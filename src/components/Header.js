@@ -1,20 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import Logo from '../assets/logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -60,11 +50,7 @@ const Header = () => {
 
       {/* Main Header */}
       <motion.header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-large' 
-            : 'bg-gradient-to-r from-primary-500 to-primary-600'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gradient-to-r from-primary-500 to-primary-600"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
@@ -95,11 +81,7 @@ const Header = () => {
                       e.preventDefault();
                       scrollToSection(item.href);
                     }}
-                    className={`font-semibold transition-all duration-300 ${
-                      isScrolled
-                        ? 'text-secondary-800 hover:text-primary-500'
-                        : 'text-white hover:text-accent-400'
-                    }`}
+                    className="font-semibold transition-all duration-300 text-white hover:text-accent-400"
                     whileHover={{ y: -2 }}
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
