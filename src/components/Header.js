@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import Logo from '../assets/logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,80 +69,75 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="container-custom py-4">
+        <div className="container-custom py-2">
           <div className="flex items-center justify-between">
-            {/* Logo */}
+            {/* Logo - Full Height */}
             <motion.div 
-              className="flex items-center space-x-4"
+              className="flex items-center"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
               <img 
-                src="/UnigoldLogo.jpg" 
+                src={Logo} 
                 alt="UniGold Finance" 
-                className="h-12 w-auto"
+                className="h-16 w-auto object-contain"
               />
-              <div className="hidden md:block">
-                <div className="text-white font-bold text-lg">UNIGOLD FINANCE™</div>
-                <div className="text-accent-400 text-sm font-medium">GOLD LOAN</div>
-              </div>
-              <div className="hidden lg:block text-white font-bold italic text-lg ml-6">
-                Jiyo Zindagi Haq Se!
-              </div>
             </motion.div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  }}
-                  className={`font-semibold transition-all duration-300 ${
-                    isScrolled 
-                      ? 'text-secondary-800 hover:text-primary-500' 
-                      : 'text-white hover:text-accent-400'
-                  }`}
-                  whileHover={{ y: -2 }}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  {item.name}
-                </motion.a>
-              ))}
-            </nav>
+            <div className="hidden md:flex items-center justify-end flex-grow">
+              {/* Desktop Navigation */}
+              <nav className="flex items-center space-x-8">
+                {navItems.map((item, index) => (
+                  <motion.a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.href);
+                    }}
+                    className={`font-semibold transition-all duration-300 ${
+                      isScrolled
+                        ? 'text-secondary-800 hover:text-primary-500'
+                        : 'text-white hover:text-accent-400'
+                    }`}
+                    whileHover={{ y: -2 }}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    {item.name}
+                  </motion.a>
+                ))}
+              </nav>
 
-            {/* Action Buttons */}
-            <div className="hidden lg:flex items-center space-x-4">
-              <motion.button
-                className="btn-accent text-sm"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="block">WE ARE</span>
-                <span className="block">HIRING</span>
-              </motion.button>
-              <motion.a
-                href="tel:18003090620"
-                className="bg-primary-500 text-white font-bold px-4 py-2 rounded-lg border-2 border-accent-500 flex items-center space-x-2 hover:bg-accent-500 hover:text-secondary-900 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Phone size={16} />
-                <span className="text-sm">
-                  <span className="block">CALL</span>
-                  <span className="block">US</span>
-                </span>
-              </motion.a>
+              {/* Action Buttons */}
+              <div className="flex items-center space-x-4 ml-8">
+                <motion.button
+                  className="btn-accent text-sm"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="block">WE ARE</span>
+                  <span className="block">HIRING</span>
+                </motion.button>
+                <motion.a
+                  href="tel:18003090620"
+                  className="bg-primary-500 text-white font-bold px-4 py-2 rounded-lg border-2 border-accent-500 flex items-center space-x-2 hover:bg-accent-500 hover:text-secondary-900 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Phone size={16} />
+                  <span className="text-sm">
+                    <span className="block">CALL</span>
+                    <span className="block">US</span>
+                  </span>
+                </motion.a>
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden text-white p-2"
+              className="md:hidden text-white p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -151,7 +147,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         <motion.div
-          className={`lg:hidden bg-primary-500 border-t border-white/20 ${
+          className={`md:hidden bg-primary-500 border-t border-white/20 ${
             isMenuOpen ? 'block' : 'hidden'
           }`}
           initial={{ opacity: 0, height: 0 }}
@@ -184,4 +180,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;
